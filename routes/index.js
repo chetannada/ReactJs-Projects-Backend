@@ -1,7 +1,9 @@
-const authRoutes = require("./authRoutes");
-const projectRoutes = require("./projectsRoutes");
+const authRoutes = require('./authRoutes')
+const projectRoutes = require('./projectsRoutes')
+const express = require('express')
+const router = express.Router()
 
-module.exports = {
-  authRoutes,
-  projectRoutes,
-};
+router.use('/auth', authRoutes)
+router.use('/projects', projectRoutes)
+
+module.exports = router
