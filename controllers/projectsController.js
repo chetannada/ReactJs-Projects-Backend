@@ -105,7 +105,7 @@ exports.addProject = async (req, res) => {
     }
 
     const stack = Array.isArray(techStack)
-      ? [...new Set(techStack.map(item => item.trim()))].slice(0, 4)
+      ? [...new Set(techStack.map((item) => item.trim()))].slice(0, 4)
       : [];
 
     const ProjectModel = getModelByType(type);
@@ -213,7 +213,9 @@ exports.updateProject = async (req, res) => {
       return res.status(403).json({ errorMessage: "Unauthorized to update this project" });
     }
 
-    const stack = Array.isArray(techStack) ? [...new Set(techStack.map(item => item.trim()))] : [];
+    const stack = Array.isArray(techStack)
+      ? [...new Set(techStack.map((item) => item.trim()))]
+      : [];
 
     existingProject.projectTitle = projectTitle ?? existingProject.projectTitle;
     existingProject.projectDescription = projectDescription ?? existingProject.projectDescription;
@@ -238,7 +240,7 @@ exports.updateProject = async (req, res) => {
     console.error("Error updating project:", err);
 
     if (err.name === "ValidationError") {
-      const messages = Object.values(err.errors).map(e => e.message);
+      const messages = Object.values(err.errors).map((e) => e.message);
       return res.status(400).json({ errorMessage: messages.join(", ") });
     }
 
